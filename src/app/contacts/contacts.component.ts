@@ -24,4 +24,10 @@ export class ContactsComponent implements OnInit {
     //this.router.navigate(['/about']);
     this.router.navigateByUrl('/about');
   }
+  onAddContact(){
+    this.router.navigate(["/contacts/edit"]);
+  }
+  onAddContactReactiveForm(){
+    this.router.navigate(["/contacts/edit-reactive-form"]);
+  }
 }

@@ -20,5 +20,10 @@ export class ContactService {
     this.contacts.splice(index,1)
   }
 
+  addContact(contact:Contact):Contact{
+    contact.id=this.contacts[(this.contacts.length-1)].id+1
+    this.contacts.push(contact);
+    return contact;
+}
 
 }
