@@ -11,14 +11,17 @@ export class SigninComponent implements OnInit {
 
   constructor(private authService:AuthService){}
   ngOnInit(): void {
-    this.isAuth=this.authService.isAuthenticated();
+    //this.isAuth=this.authService.isAuthenticated();
+     this.authService.authSubject.subscribe({
+      next: (isAuth:boolean)=>this.isAuth=isAuth
+     })
   }
   onSignIn(){
     this.authService.signIn();
-    this.isAuth=this.authService.isAuthenticated();
+   // this.isAuth=this.authService.isAuthenticated();
   }
   onSignOut(){
     this.authService.signOut();
-    this.isAuth=this.authService.isAuthenticated();
+    //this.isAuth=this.authService.isAuthenticated();
   }
 }
