@@ -10,14 +10,30 @@ import { ContactService } from '../services/contact.service';
 })
 export class ContactsComponent implements OnInit {
    
-  contacts!:Contact[];
-  constructor(private router:Router,
-              private contactService:ContactService){}
+  contacts: Contact[];
+  //errMess:string;
+  //isWaiting:boolean=true;
+  public constructor(private router: Router, private contactService: ContactService) { }
   ngOnInit(): void {
-   this.contacts=this.contactService.getAllContact();
+    //this.contacts = this.contactService.getContacts();
+    this.contactService.getAllContacts()
+                       .subscribe({next:(contacts)=>{this.contacts=contacts;/*this.isWaiting=false;*/},
+                                    error:(errmess)=>{this.contacts=[];
+                                                      /*this.errMess=<any>errmess;this.isWaiting=false;*/},
+                                    });                                                                 
   }
-  deleteContact(id:number){
-    this.contactService.deleteContactById(id);
+ onDeleteContact(id: number) {
+    // this.contactService.deleteContactById(id);
+    this.contactService.deleteContactById(id).subscribe(
+      {
+          next: result => {
+          console.log("contact deleted!");
+          let index = this.contacts.findIndex(contact => contact.id == id)
+          this.contacts.splice(index, 1);
+        }
+      }
+    );
+
   }
 
   goToAbout(){
@@ -25,7 +41,7 @@ export class ContactsComponent implements OnInit {
     this.router.navigateByUrl('/about');
   }
   onAddContact(){
-    this.router.navigate(["/contacts/edit"]);
+    this.router.navigate(["/contacts/edit/-1"]);
   }
   onAddContactReactiveForm(){
     this.router.navigate(["/contacts/edit-reactive-form"]);

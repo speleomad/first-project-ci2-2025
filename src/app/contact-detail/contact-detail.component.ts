@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Contact } from '../shared/contact';
 import { Subscription } from 'rxjs';
 import { ContactService } from '../services/contact.service';
@@ -16,7 +16,8 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
 
   constructor(private contactService: ContactService,
               private route: ActivatedRoute,
-              private router:Router){}
+              private router:Router,
+              @Inject('BaseURL') public baseUrl: string){}
   ngOnInit(): void {
       /*snapshot method */ 
       // this.idContact=this.route.snapshot.params['id'];
@@ -25,7 +26,8 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
         const id = params.get('id');
         if (id) { // Check if 'id' is not null
           this.idContact = +id; // Convert 'id' from string to number
-          this.contact = this.contactService.getContactbyId(this.idContact);
+          //this.contact = this.contactService.getContactbyId(this.idContact);
+          this.contactService.getContactById(this.idContact).subscribe({ next: (contact) => this.contact = contact });
         }
       });
   }
