@@ -11,15 +11,15 @@ import { ContactService } from '../services/contact.service';
 export class ContactsComponent implements OnInit {
    
   contacts: Contact[];
-  //errMess:string;
-  //isWaiting:boolean=true;
+  errMsg:string;
+  isWaiting:boolean=true;
   public constructor(private router: Router, private contactService: ContactService) { }
   ngOnInit(): void {
     //this.contacts = this.contactService.getContacts();
     this.contactService.getAllContacts()
-                       .subscribe({next:(contacts)=>{this.contacts=contacts;/*this.isWaiting=false;*/},
+                       .subscribe({next:(contacts)=>{this.contacts=contacts;this.isWaiting=false;},
                                     error:(errmess)=>{this.contacts=[];
-                                                      /*this.errMess=<any>errmess;this.isWaiting=false;*/},
+                                                      this.errMsg=<any>errmess;this.isWaiting=false;},
                                     });                                                                 
   }
  onDeleteContact(id: number) {

@@ -50,10 +50,24 @@
     },
     {
       "id": 5,
-      "name": "demo demo10",
+      "name": "demo demo1",
       "website": "http://mywebsite.com",
       "projects": [
         "web",
+        "html",
+        "html"
+      ],
+      "image": "images/default-avatar.jpg",
+      "featured": false,
+      "email": "demo@gmail.com"
+    },
+    {
+      "id": 6,
+      "name": "demo demo110",
+      "website": "http://mywebsite.com",
+      "projects": [
+        "web",
+        "html",
         "html"
       ],
       "image": "images/default-avatar.jpg",

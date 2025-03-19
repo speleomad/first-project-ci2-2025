@@ -37,7 +37,7 @@ export class EditContactComponent implements OnInit {
     })
   }
   onSubmit() {
-    // Convertir projects en tableau de chaine de caractère
+    // Convertir projects en tableau de chaine de caractères
     this.contact.projects = this.contact.projects.toString().split(',').map(project => project.trim());
     //Add product
     if (this.contact.id == null) {
